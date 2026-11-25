@@ -1,9 +1,12 @@
 import { useState } from "react";
 import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
 import SearchBar from "./components/SearchBar";
 import CategoryFilter from "./components/CategoryFilter";
 import ProductList from "./components/ProductList";
+import PromoBanner from "./components/PromoBanner";
 import CartPanel from "./components/CartPanel";
+import Footer from "./components/Footer";
 import { products } from "./data/products";
 import type { CartItem, Product } from "./types";
 import "./App.css";
@@ -52,7 +55,6 @@ export default function App() {
   });
 
   const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
-
   const cartTotal = cart.reduce(
     (sum, item) => sum + item.product.price * item.qty,
     0
@@ -64,6 +66,9 @@ export default function App() {
         cartCount={cartCount}
         onCartClick={() => setIsCartOpen(!isCartOpen)}
       />
+
+      <Hero image="/banner/hero.webp" product={products[0]} />
+
       <main>
         <SearchBar value={search} onChange={setSearch} />
         <CategoryFilter
@@ -78,8 +83,17 @@ export default function App() {
           favorites={favorites}
           onToggleFavorite={toggleFavorite}
           onAddToCart={addToCart}
+          banner={
+            <PromoBanner
+              title="Setup Kampus & Kerja"
+              image="/banner/setup-kampus.webp"
+              product={products[7]}
+            />
+          }
         />
       </main>
+
+      <Footer />
 
       <CartPanel
         items={cart}
@@ -88,7 +102,6 @@ export default function App() {
         onRemove={removeFromCart}
         total={cartTotal}
       />
-
     </div>
   );
 }

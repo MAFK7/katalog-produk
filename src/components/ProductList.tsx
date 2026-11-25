@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+import type { ReactNode } from "react";
 import type { Product } from "../types";
 import ProductCard from "./ProductCard";
 
@@ -6,6 +8,7 @@ type ProductListProps = {
     favorites: number[];
     onToggleFavorite: (id: number) => void;
     onAddToCart: (product: Product) => void;
+    banner?: ReactNode;
 };
 
 export default function ProductList({
@@ -13,6 +16,7 @@ export default function ProductList({
     favorites,
     onToggleFavorite,
     onAddToCart,
+    banner,
 }: ProductListProps) {
     if (products.length === 0) {
         return <p className="empty">Produk tidak ditemukan.</p>;
@@ -20,14 +24,16 @@ export default function ProductList({
 
     return (
         <div className="grid" id="produk">
-            {products.map((product) => (
-                <ProductCard
-                    key={product.id}
-                    product={product}
-                    isFavorite={favorites.includes(product.id)}
-                    onToggleFavorite={onToggleFavorite}
-                    onAddToCart={onAddToCart}
-                />
+            {products.map((product, index) => (
+                <Fragment key={product.id}>
+                    <ProductCard
+                        product={product}
+                        isFavorite={favorites.includes(product.id)}
+                        onToggleFavorite={onToggleFavorite}
+                        onAddToCart={onAddToCart}
+                    />
+                    {index === 2 && products.length > 3 && banner}
+                </Fragment>
             ))}
         </div>
     );
