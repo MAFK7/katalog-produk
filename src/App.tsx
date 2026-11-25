@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import SearchBar from "./components/SearchBar";
 import CategoryFilter from "./components/CategoryFilter";
 import ProductList from "./components/ProductList";
+import CartPanel from "./components/CartPanel";
 import { products } from "./data/products";
 import type { CartItem, Product } from "./types";
 import "./App.css";
@@ -15,6 +16,7 @@ export default function App() {
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
   const [favorites, setFavorites] = useState<number[]>([]);
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const toggleFavorite = (id: number) => {
     setFavorites((prev) =>
@@ -36,6 +38,10 @@ export default function App() {
     });
   };
 
+  const removeFromCart = (id: number) => {
+    setCart((prev) => prev.filter((item) => item.product.id !== id));
+  };
+
   const filteredProducts = products.filter((product) => {
     const matchSearch = product.name
       .toLowerCase()
@@ -47,9 +53,17 @@ export default function App() {
 
   const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
 
+  const cartTotal = cart.reduce(
+    (sum, item) => sum + item.product.price * item.qty,
+    0
+  );
+
   return (
     <div id="top">
-      <Navbar cartCount={cartCount} onCartClick={() => { }} />
+      <Navbar
+        cartCount={cartCount}
+        onCartClick={() => setIsCartOpen(!isCartOpen)}
+      />
       <main>
         <SearchBar value={search} onChange={setSearch} />
         <CategoryFilter
@@ -66,6 +80,15 @@ export default function App() {
           onAddToCart={addToCart}
         />
       </main>
+
+      <CartPanel
+        items={cart}
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+        onRemove={removeFromCart}
+        total={cartTotal}
+      />
+
     </div>
   );
 }
