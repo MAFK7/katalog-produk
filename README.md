@@ -1,32 +1,64 @@
-# React + TypeScript + Vite
+# Katalog Produk
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Katalog produk satu halaman untuk elektronik, buku, alat tulis, dan aksesoris. Pengguna bisa mencari produk, memfilter berdasarkan kategori, menandai favorit, melihat detail produk, dan mengelola keranjang belanja.
 
-Currently, two official plugins are available:
+Demo: https://katalog.nugas.my.id
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Fitur
 
-## React Compiler
+- Pencarian produk berdasarkan nama
+- Filter kategori: Semua, Elektronik, Buku, Alat Tulis, Aksesoris
+- Favorit: tandai produk dan tampilkan favorit saja
+- Detail produk: tampilkan atau sembunyikan deskripsi pada kartu
+- Keranjang: tambah produk, hapus item, jumlah item, dan total harga
+- Tampilan responsif untuk desktop dan mobile
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Teknologi
 
-## Expanding the Oxlint configuration
+- React
+- Vite
+- TypeScript
+- CSS
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## Struktur Proyek
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```
+src/
+├── components/
+│   ├── Navbar.tsx
+│   ├── ProfileButton.tsx
+│   ├── Hero.tsx
+│   ├── SearchBar.tsx
+│   ├── CategoryFilter.tsx
+│   ├── ProductList.tsx
+│   ├── ProductCard.tsx
+│   ├── PromoBanner.tsx
+│   ├── CartPanel.tsx
+│   └── Footer.tsx
+├── data/
+│   ├── products.ts
+│   └── profile.ts
+├── utils/
+│   └── format.ts
+├── types.ts
+├── App.tsx
+└── App.css
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Menjalankan di Komputer
+
+```bash
+git clone <url-repository>
+cd katalog-react
+npm install
+npm run dev
+```
+
+Buka alamat yang muncul di terminal (biasanya http://localhost:5173).
+
+## Build untuk Produksi
+
+```bash
+npm run build
+npm run preview
+```
