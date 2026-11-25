@@ -2,7 +2,7 @@
 
 Katalog produk satu halaman untuk elektronik, buku, alat tulis, dan aksesoris. Pengguna bisa mencari produk, memfilter berdasarkan kategori, menandai favorit, melihat detail produk, dan mengelola keranjang belanja.
 
-Demo: https://katalog.nugas.my.id
+Demo: https://katalog.nugasgas.my.id
 
 ## Fitur
 
