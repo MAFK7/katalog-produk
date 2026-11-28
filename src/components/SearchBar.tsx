@@ -7,6 +7,7 @@ export default function SearchBar({ value, onChange }: SearchBarProps) {
     return (
         <input
             className="search"
+            id="search-input"
             type="search"
             placeholder="Cari produk..."
             value={value}

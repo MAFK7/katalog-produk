@@ -2,23 +2,48 @@ import type { Product } from "../types";
 import { formatRupiah } from "../utils/format";
 
 type PromoBannerProps = {
-    title: string;
-    image: string;
-    product: Product;
+  titleLines: string[];
+  image: string;
+  product: Product;
+  onShop: () => void;
+  onView: () => void;
 };
 
-export default function PromoBanner({ title, image, product }: PromoBannerProps) {
-    return (
-        <section className="banner">
-            <img className="banner__img" src={image} alt={title} />
+export default function PromoBanner({
+  titleLines,
+  image,
+  product,
+  onShop,
+  onView,
+}: PromoBannerProps) {
+  return (
+    <section className="banner">
+      <img className="banner__img" src={image} alt={titleLines.join(" ")} />
 
-            <h2 className="banner__title">{title}</h2>
+      <div className="banner__content">
+        <p className="banner__eyebrow">{product.category}</p>
 
-            <div className="banner__tag">
-                <span className="banner__tag-category">{product.category}</span>
-                <span className="banner__tag-name">{product.name}</span>
-                <span className="banner__tag-price">{formatRupiah(product.price)}</span>
-            </div>
-        </section>
-    );
+        <h2 className="banner__title">
+          {titleLines.map((line) => (
+            <span key={line} className="banner__line">
+              {line}
+            </span>
+          ))}
+        </h2>
+
+        <p className="banner__sub">
+          {product.name} · {formatRupiah(product.price)}
+        </p>
+
+        <div className="banner__actions">
+          <button className="banner__cta" onClick={onShop}>
+            Belanja Aksesoris
+          </button>
+          <button className="banner__link" onClick={onView}>
+            Lihat Produk
+          </button>
+        </div>
+      </div>
+    </section>
+  );
 }
